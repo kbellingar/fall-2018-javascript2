@@ -7,7 +7,7 @@
 
 </head>
 <body>
-  <h1>Kyle's Online To-Do List</h1>
+  <h1>Online To-Do List</h1>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">Make Time</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,7 +26,7 @@
     <h1>
       These are my priorities, I think...
     </h1>
-    <form onsubmit="return addNewPriority(event)">
+    <form id="addNewPriority" onsubmit="return addNewPriority(event)" onclick="resetform()" >
       <div class="form-group">
         <label for="exampleInputEmail1">New Item</label>
         <input type="text" class="form-control" onchange="return priorityChange(event)" id="exampleInputPriority1" placeholder="Enter a priority.... like Family">
@@ -42,12 +42,14 @@
   <script>
     var currentPriority = ""
     var priorities = []
+    form.reset();
     function addNewPriority(event){
         var nextPriorityLevel = priorities.length + 1
       priorities.push({name: currentPriority, level: nextPriorityLevel})
       drawPriorities()
       return false;
     }
+  
     function priorityChange(event){
       console.log(event.target.value)
       currentPriority = event.target.value
@@ -70,6 +72,14 @@
       priorityToChange.level = priorityToChange.level - 1
       drawPriorities()
     }
+    function completePriority(name) {
+      var priorityClickedOn = priorities.find(p => p.name === name)
+      var levelToChange = priorityClickedOn.level + 1
+      var priorityToChange = priorities.find(p => p.level === levelToChange)
+      priorityClickedOn.level = priorityClickedOn.level * 0
+      priorityToChange.level = priorityToChange.level - 1
+      drawPriorities()
+    }
     function drawPriorities() {
       var list = document.getElementById("priority-list")
       var currentPriorities = priorities
@@ -83,13 +93,16 @@
           <span class="float-buttons">
             <button ${makeHigherDisabled} onclick="return makeHigherPriority('${x.name}')" type="button" class="btn btn-sm btn-outline-primary">Make Higher Priority</button>
             <button ${makeLowerDisabled} onclick="return makeLowerPriority('${x.name}')" type="button" class="btn btn-sm btn-outline-secondary">Make Lower Priority</button>
+            <button onclick="return completePriority('${x.name}')" type="button" class="btn btn-sm btn-outline-success">Mark Complete</button>
           </span>
           </li>`
         })
         .join("")
       list.innerHTML = currentPriorities
     }
+
     drawPriorities()
+  
   </script>
 
 
@@ -117,14 +130,14 @@
 //   var newArray = mapPractice.map(callback)
 //   console.log(newArray)
 
-      var filterPractice = [{name: "zach"} , {name: "bob"} , {name: "susan"}]
-        function callback(e) {
-         // var name = e.name
-          return name !== "bob"
-        }
-        var newArray = filterPractice.filter(callback)
-        console.log(newArray)
-        </script>
+//      var filterPractice = [{name: "zach"} , {name: "bob"} , {name: "susan"}]
+ //       function callback(e) {
+//         // var name = e.name
+//          return name !== "bob"
+//        }
+//        var newArray = filterPractice.filter(callback)
+//        console.log(newArray)
+//        </script>
 </body>
 
 
