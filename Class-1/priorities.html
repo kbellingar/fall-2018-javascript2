@@ -26,7 +26,7 @@
     <h1>
       These are my priorities, I think...
     </h1>
-    <form id="addNewPriority" onsubmit="return addNewPriority(event)" onclick="resetform()" >
+    <form id="NewPriority" onsubmit="return addNewPriority(event)" >
       <div class="form-group">
         <label for="exampleInputEmail1">New Item</label>
         <input type="text" class="form-control" onchange="return priorityChange(event)" id="exampleInputPriority1" placeholder="Enter a priority.... like Family">
@@ -42,7 +42,6 @@
   <script>
     var currentPriority = ""
     var priorities = []
-    form.reset();
     function addNewPriority(event){
         var nextPriorityLevel = priorities.length + 1
       priorities.push({name: currentPriority, level: nextPriorityLevel})
@@ -76,17 +75,18 @@
       var priorityClickedOn = priorities.find(p => p.name === name)
       var levelToChange = priorityClickedOn.level + 1
       var priorityToChange = priorities.find(p => p.level === levelToChange)
-      priorityClickedOn.level = priorityClickedOn.level * 0
+      priorityClickedOn.level = priorities.length + 1
       priorityToChange.level = priorityToChange.level - 1
       drawPriorities()
     }
     function drawPriorities() {
       var list = document.getElementById("priority-list")
       var currentPriorities = priorities
+        
         .sort((x,y) => x.level - y.level)
         .map(x => {
           var makeHigherDisabled = x.level === 1 ? "disabled": ""
-          var makeLowerDisabled = x.level === priorities.length ? "disabled": ""
+          var makeLowerDisabled = x.level === priorities.length ? "disabled": "" 
           return `<li class="list-group-item">
           <span class="badge badge-primary badge-pill"> ${x.level} </span>
           <span>${x.name}</span>
@@ -96,8 +96,10 @@
             <button onclick="return completePriority('${x.name}')" type="button" class="btn btn-sm btn-outline-success">Mark Complete</button>
           </span>
           </li>`
+          
         })
         .join("")
+        
       list.innerHTML = currentPriorities
     }
 
