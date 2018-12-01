@@ -42,3 +42,12 @@
           }
 
           .filter(priority>0)
+
+
+          function completePriority(name) {
+            var priorityClickedOn = priorities.find(p => p.name === name)
+            var levelToChange = priorityClickedOn.level + 1
+            var priorityToChange = priorities.find(p => p.level === levelToChange)
+            priorityClickedOn.level = priorityClickedOn.level * 0
+            priorityToChange.level = priorityToChange.level - 1
+            drawPriorities()

@@ -1,1 +1,21 @@
 
+.complete-button {
+    float: right;
+}
+
+body {
+    background-color: seashell;
+}
+
+h1 {
+   text-align: center;
+}
+
+.btn-primary {
+    border-color: gray;
+
+}
+
+.navbar-brand {
+    background-color:red;
+}

@@ -7,28 +7,28 @@
 
 </head>
 <body>
-  <h1>Online To-Do List</h1>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Make Time</a>
+  <h1>Make Time</h1>
+  <!-- <nav class="navbar navbar-inverse">
+    <a class="" href="#"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <a class="nav-item nav-link" href="/#"><span class="sr-only">(current)</span></a>
-        <a class="nav-item nav-link active" href="priorities.html">To-Do List</a>
+        <a class="nav-item nav-link active" href="priorities.html"></a>
         <a class="nav-item nav-link" href="todo"></a>
         <a class="nav-item nav-link" href="past"></a>
       </div>
     </div>
-  </nav>
+  </nav> -->
   <div class="container">
     <h1>
       These are my priorities, I think...
     </h1>
     <form id="NewPriority" onsubmit="return addNewPriority(event)" >
       <div class="form-group">
-        <label for="exampleInputEmail1">New Item</label>
+        <label for="exampleInputEmail1"></label>
         <input type="text" class="form-control" onchange="return priorityChange(event)" id="exampleInputPriority1" placeholder="Enter a priority.... like Family">
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
@@ -71,18 +71,19 @@
       priorityToChange.level = priorityToChange.level - 1
       drawPriorities()
     }
-    function completePriority(name) {
-      var priorityClickedOn = priorities.find(p => p.name === name)
-      var levelToChange = priorityClickedOn.level + 1
-      var priorityToChange = priorities.find(p => p.level === levelToChange)
-      priorityClickedOn.level = priorities.length + 1
-      priorityToChange.level = priorityToChange.level - 1
-      drawPriorities()
-    }
+   
+    // function completePriority(name) {
+    //   var priorityClickedOn = priorities.find(p => p.name === name)
+    //   var levelToChange = priorityClickedOn.level + 1
+    //   var priorityToChange = priorities.find(p => p.level === levelToChange)
+    //   priorityClickedOn.level = priorities.length
+    //   priorityToChange.level = priorityToChange.level - 1
+    //   drawPriorities()
+    // }
+
     function drawPriorities() {
       var list = document.getElementById("priority-list")
       var currentPriorities = priorities
-        
         .sort((x,y) => x.level - y.level)
         .map(x => {
           var makeHigherDisabled = x.level === 1 ? "disabled": ""
@@ -93,8 +94,12 @@
           <span class="float-buttons">
             <button ${makeHigherDisabled} onclick="return makeHigherPriority('${x.name}')" type="button" class="btn btn-sm btn-outline-primary">Make Higher Priority</button>
             <button ${makeLowerDisabled} onclick="return makeLowerPriority('${x.name}')" type="button" class="btn btn-sm btn-outline-secondary">Make Lower Priority</button>
-            <button onclick="return completePriority('${x.name}')" type="button" class="btn btn-sm btn-outline-success">Mark Complete</button>
           </span>
+          <span class="complete-button">
+          <button onclick="return completePriority('${x.name}')" type="button" class="btn btn-sm btn-outline-success">Mark Complete</button>
+          </span>
+          <span><div class="form-group"> <label for="comment">Details:</label> <textarea class="form-control" rows="1" id="comment"></textarea></div>
+            </span>
           </li>`
           
         })
@@ -104,11 +109,7 @@
     }
 
     drawPriorities()
-  
-  </script>
-
-
-
+</script>
 
   <script>
   // var mapPractice = [1, 2, 3]
